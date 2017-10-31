@@ -1,2 +1,2 @@
 # addressbook
-Address book made with ajax and php
+Ajax and PHP powered address book.

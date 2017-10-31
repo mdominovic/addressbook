@@ -39,8 +39,75 @@ $contacts = $db->resultSet();
                     <td><?php echo $contact->contact_group; ?></td>
                     <td>
                         <ul class="button-group">
-                          <li><a href="#" class="button tiny">Edit</a></li>
-                          <li><a href="#" class="button tiny [secondary alert success]">Delete</a></li>
+                          <li>
+                              <a href="#" class="button tiny" data-reveal-id="editModal<?php echo $contact->id; ?>" data-contact-id="<?php echo $contact->id; ?>">Edit</a>
+                              <div id="editModal<?php echo $contact->id; ?>" data-cid="<?php echo $contact->id; ?>" class="reveal-modal editModal" data-reveal>
+                                  <h2>Edit Contact</h2>
+                                    <form id="editContact" action="#" method="post">
+                                          <div class="row">
+                                            <div class="large-6 columns">
+                                              <label>First Name
+                                                <input name="first_name" type="text" placeholder="Enter first name" value="<?php echo $contact->first_name; ?>" />
+                                              </label>
+                                            </div>
+                                            <div class="large-6 columns">
+                                              <label>Last Name
+                                                <input name="last_name" type="text" placeholder="Enter last name" value="<?php echo $contact->last_name; ?>" />
+                                              </label>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                                <div class="large-4 columns">
+                                                  <label>E-mail
+                                                    <input name="email" type="email" placeholder="Enter e-mail address" value="<?php echo $contact->email; ?>" />
+                                                  </label>
+                                                </div>
+                                                <div class="large-4 columns">
+                                                  <label>Phone Number
+                                                    <input name="phone" type="text" placeholder="Enter phone number" value="<?php echo $contact->phone; ?>" />
+                                                  </label>
+                                                </div>
+                                                <div class="large-4 columns">
+                                                  <label>Contact Group
+                                                    <select name="contact_group">
+                                                      <option value="family" <?php if($contact->contact_group == 'Family'){echo $selected;} ?> >Family</option>
+                                                      <option value="friends" <?php if($contact->contact_group == 'Friends'){echo $selected;} ?> >Friends</option>
+                                                      <option value="Business" <?php if($contact->contact_group == 'Business'){echo $selected;} ?> >Business</option>
+                                                    </select>
+                                                  </label>
+                                                </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="large-6 columns">
+                                                <label>Address 1
+                                                    <input name="address1" type="text" placeholder="Enter address" value="<?php echo $contact->address1; ?>" />
+                                                </label>
+                                            </div>
+                                            <div class="large-6 columns">
+                                                <label>Address 2
+                                                    <input name="address2" type="text" placeholder="Enter address" value="<?php echo $contact->address2; ?>" />
+                                                </label>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="large-12 columns">
+                                              <label>Notes
+                                                <textarea name="notes" placeholder="Enter text"><?php echo $contact->notes; ?></textarea>
+                                              </label>
+                                            </div>
+                                          </div>
+                                          <input type="hidden" name="id" value="<?php echo $contact->id; ?>" />
+                                          <input name="submit" type="submit" class="add-btn button right small" value="Submit">
+                                          <a class="close-reveal-modal">&#215;</a>
+                                    </form>
+                              </div>
+                          </li>
+                          <li>
+                              <form id="deleteContact" action="#" method="post">
+                                  <input type="hidden" name="id" value="<?php echo $contact->id; ?> ">
+                                  <input type="submit" class="delete-btn button tiny secondary alert" value="Delete">
+                              </form>
+                          </li>
                         </ul>
                     </td>
                 </tr>
